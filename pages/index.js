@@ -84,11 +84,13 @@ export default function Home(props) {
                 options={options}                
                 className="form-select" 
                 multiple 
-                aria-label="multiple select example"
+                aria-label="multiple select"
               >
+
                 {options.map(item => (
                   <option value={item.value} key={item.value}>{item.label}</option>
                 ))}
+                
               </select>
 
             </div>
@@ -96,7 +98,9 @@ export default function Home(props) {
 
           <div className="row justify-content-center">
             <div className="col-md-10 col-xl-10">
+
               {listTrips(trips)}
+
             </div>
           </div>
 
