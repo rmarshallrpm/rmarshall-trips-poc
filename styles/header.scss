@@ -1,0 +1,37 @@
+@import '_custom-variables';
+
+#navMenu {
+  margin-bottom: 1em;
+  .navbar {
+    background-color: $color-primary-3;
+  }
+  .navbar-brand {
+    width: 65vw;
+    @media screen and (min-width: 768px) {
+      width: 350px;
+    }
+    a:hover {
+      color: #ffffff;
+    }
+  }
+  .nav-item {
+    padding:  0 8px;
+    .nav-link {
+      color: #ffffff;
+      font-size: 20px;
+    }
+  }
+  .dropdown-menu {
+    background-color: $color-primary-0;
+    .dropdown-item {
+      color: #ffffff;
+      &:hover {
+        background-color: $color-primary-2;
+      }  
+    }
+  }
+}
+
+.margin-from-navbar {
+  margin-top: 66px;
+}

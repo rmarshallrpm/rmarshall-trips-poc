@@ -1,0 +1,90 @@
+$theme-colors: (
+  'blue':         #0d6efd,
+  'indigo':       #6610f2,
+  'purple':       #6f42c1,
+  'pink':         #d63384,
+  'red':          #dc3545,
+  'orange':       #fd7e14,
+  'yellow':       #ffc107,
+  'green':        #198754,
+  'teal':         #20c997,
+  'cyan':         #0dcaf0
+);
+
+//import colors and add to custom map
+@import '_custom-variables';
+
+$custom-colors: (
+  "red-lighter":  $red-lighter,
+  "red-light":    $red-light,
+  "red-base":     $red-base,
+  "red-dark":     $red-dark,
+  "red-darker":   $red-darker,
+
+  "blue-lighter":  $blue-lighter,
+  "blue-light":  $blue-light,
+  "blue-base":  $blue-base,
+  "blue-dark":  $blue-dark,
+  "blue-darker":  $blue-darker,
+
+  "green-lighter":  $green-lighter,
+  "green-light":  $green-light,
+  "green-base":  $green-base,
+  "green-dark":  $green-dark,
+  "green-darker":  $green-darker,
+
+  "color-primary-0": $color-primary-0,
+  "color-primary-1": $color-primary-1,
+  "color-primary-2": $color-primary-2,
+  "color-primary-3": $color-primary-3,
+  "color-primary-4": $color-primary-4,
+
+  "color-secondary-1-0": $color-secondary-1-0,
+  "color-secondary-1-1": $color-secondary-1-1,
+  "color-secondary-1-2": $color-secondary-1-2,
+  "color-secondary-1-3": $color-secondary-1-3,
+  "color-secondary-1-4": $color-secondary-1-4,
+
+  "color-secondary-2-0": $color-secondary-2-0,
+  "color-secondary-2-1": $color-secondary-2-1,
+  "color-secondary-2-2": $color-secondary-2-2,
+  "color-secondary-2-3": $color-secondary-2-3,
+  "color-secondary-2-4": $color-secondary-2-4
+);
+
+//Merge the maps
+$theme-colors: map-merge($theme-colors, $custom-colors);
+
+@import 'bootstrap/scss/bootstrap.scss';
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+}
+
+#__next {
+  height: 100% !important;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  cursor: pointer;
+}
+  footer a.nav-link {
+    font-size: 1em;
+  }
+  footer a.nav-link:hover {
+    text-decoration: underline;
+  }
+    
+* {
+  box-sizing: border-box;
+}
+
+.responsive-image {
+  min-width: 100%;
+}

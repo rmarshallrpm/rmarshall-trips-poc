@@ -1,0 +1,12 @@
+@import '_custom-variables';
+
+#footerMenu {
+  background-color: $color-secondary-2-3;
+  .nav-item {
+    .nav-link {
+      color: #ffffff;
+      font-size: 14px;
+      font-weight: 600;
+    }
+  }
+}
