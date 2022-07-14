@@ -69,13 +69,13 @@ export default function Home(props) {
 
         <div className="container">
           <div className="row justify-content-center">
-            <div className="col-2 my-3">
+            <div className="col-5 col-md-4 col-lg-3 my-3">
               <div className="col form-check form-switch mt-1">
                 <input className="form-check-input" onChange={handleChange} checked={checked} type="checkbox" role="switch" id="sortOrder"/>
                 <label className="form-check-label" htmlFor="sortOrder">Sort Descending</label>
               </div>    
             </div>
-            <div className="col-3 my-3">
+            <div className="col-7 col-md-6 col-lg-3 my-3">
               
               <select 
                 size={options.length}
