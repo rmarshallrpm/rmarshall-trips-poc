@@ -13,8 +13,8 @@ export default function Home(props) {
   const [filter, setFilter] = useState(['all_vacations']);
   const options = props.tripTypes;
 
-  const handleSort = (type) => {
-    const sortedData = [...trips].sort((a,b) => {
+  const handleSort = (type, data) => {
+    const sortedData = [...data].sort((a,b) => {
       if(type == 'checkinAccd') {
         return new Date(a.checkInDate) - new Date(b.checkInDate)
       } else if(type == 'checkinDesc') {
@@ -27,9 +27,9 @@ export default function Home(props) {
   const handleChange = () => {
     setChecked(!checked);
     if(!checked) {
-      handleSort('checkinAccd')
+      handleSort('checkinAccd', trips)
     } else {
-      handleSort('checkinDesc')
+      handleSort('checkinDesc', trips)
     }
   };
 
@@ -38,18 +38,31 @@ export default function Home(props) {
     const optionsUp = [...event.target.options]
       .filter(option => option.selected)
       .map(x => x.value);
+      
     setFilter(optionsUp);
 
     //set trips
-    var newArray = props.tripSet;
-    optionsUp.map((element) => {
-      if(element == 'all_vacations') {  //return out, dont set anything further
-        return setFilter([element]);
-      }
+    var newArray = []; 
 
-      return newArray = newArray.filter(trip => formatNoSpaces(trip.unitStyleName) === element);
-    });
-    setTrips(newArray)
+    if(optionsUp.includes('all_vacations')) {  //dont set anything further
+      setFilter(['all_vacations']); //reset
+      setTrips(props.tripSet); //reset
+    } else {      
+      optionsUp.forEach((option,index) => {
+        var tempArray = props.tripSet.filter(trip => formatNoSpaces(trip.unitStyleName) === option);
+        newArray = newArray.concat(tempArray);
+      });
+
+      //sort newArray
+      let sortedTrips = [];
+      if(!checked) {
+        sortedTrips = newArray.sort((a,b) => { return new Date(b.checkInDate) - new Date(a.checkInDate) });
+      } else {
+        sortedTrips = newArray.sort((a,b) => { return new Date(a.checkInDate) - new Date(b.checkInDate) });
+      }  
+
+      setTrips(sortedTrips)      
+    }
   };
 
   return (
