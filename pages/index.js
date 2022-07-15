@@ -46,9 +46,10 @@ export default function Home(props) {
 
     if(optionsUp.includes('all_vacations')) {  //dont set anything further
       setFilter(['all_vacations']); //reset
+      setChecked(true);
       setTrips(props.tripSet); //reset
     } else {      
-      optionsUp.forEach((option,index) => {
+      optionsUp.map((option) => {
         var tempArray = props.tripSet.filter(trip => formatNoSpaces(trip.unitStyleName) === option);
         newArray = newArray.concat(tempArray);
       });
@@ -68,7 +69,7 @@ export default function Home(props) {
   return (
     <div className={styles.container}>
       <Head>
-        <title>Roger Marshall's App</title>
+        <title>Roger Marshall&#39;s App</title>
         <meta name="description" content="POC of Trips display" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
@@ -169,35 +170,42 @@ function formatNoSpaces(option) {
 function listTrips(obj) {
   if(!obj) { return 'missing trips' }
   const { publicRuntimeConfig } = getConfig()
+  let content = [], columns = [];
 
-  return (
-    obj.map((trip) => (
-      <div className="card mb-3" key={trip.curatedTripMasterInventoryId}>
-        <div className="row g-0">
-          <div className="col-md-4">
-            <Image
-              alt={trip.unitName + ', ' + trip.locationName}
-              src={`${publicRuntimeConfig.cmsUrl + trip.heroImage}`}
-              layout="responsive"
-              width={720}
-              height={480}
-            />
+  obj.forEach ((trip, i) => {
+    //build the columns
+    columns.push(
+      <div key={i} className="col">
+        <div className="card">
+          <div className='card-img-top'>
+          <Image
+            alt={trip.unitName + ', ' + trip.locationName}
+            src={`${publicRuntimeConfig.cmsUrl + trip.heroImage}`}
+            layout="responsive"
+            width={540}
+            height={360}
+            priority={i < 9? true : false}
+          />
           </div>
-          <div className="col-md-8">
-            <div className="card-body">
-              <h4 className="card-title">{trip.unitName}</h4>
-
-              <p className="card-text">
-                <span className="fw-bold">Type:</span> {trip.unitStyleName}
-              </p>
-
-              <p className="card-text">
-                <small><span className="fw-bold">Check-in Date:</span> {formatDate(trip.checkInDate)}</small>
-              </p>
-            </div>
+          <div className="card-body">
+            <h4 className={styles.cardtitle}>{trip.unitName}</h4>
+            <p className={styles.cardtext}>
+              <span>Type:</span> {trip.unitStyleName}
+            </p>
+            <p className={styles.cardtext}>
+              <span>Check-in Date:</span> {formatDate(trip.checkInDate)}
+            </p>
           </div>
-        </div>
+        </div>  
       </div>
-    ))
-  );
+    );
+
+    //push conditional rows 
+    if((i+1) % 4 === 0) {
+      content.push(<div key ={i} className ="row row-cols-1 row-cols-sm-2 row-cols-lg-4 g-4 mb-4">{columns}</div>);
+      columns = [];
+    }
+  });
+
+  return content;
 }
